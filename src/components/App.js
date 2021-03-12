@@ -1,5 +1,10 @@
 import React from 'react'
+import Button from '@material-ui/core/Button'
 
 export default () => {
-    return <div>Blog app</div>
+    return (
+        <>
+            <h1>Blog app</h1>
+        </>
+    )
 }
