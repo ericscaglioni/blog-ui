@@ -1,7 +1,7 @@
 import { Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
-import { PostForm } from './post-form'
+import { PostForm } from './PostForm'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -16,16 +16,14 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default () => {
+export default ({ setPosts }) => {
     const classes = useStyles()
     return (
-        <>
-            <Paper className={classes.paper}>
-                <Typography component='h1' variant='h4' align='center' color='primary'>
-                    Create post
-                </Typography>
-                <PostForm />
-            </Paper>
-        </>
+        <Paper className={classes.paper}>
+            <Typography component='h1' variant='h4' align='center' color='primary'>
+                Create post
+            </Typography>
+            <PostForm setPosts={setPosts}/>
+        </Paper>
     )
 }

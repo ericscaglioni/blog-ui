@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
 import axios from 'axios'
+import React, { useState } from 'react'
 
-export const PostForm = () => {
+export const PostForm = ({ setPosts }) => {
     const [post, setPost] = useState({
         title: '',
         text: ''
@@ -10,11 +10,14 @@ export const PostForm = () => {
     const submit = async (e) => {
         try {
             e.preventDefault()
-            const response = await axios.post(
+            const { data } = await axios.post(
                 'http://localhost:8001/api/posts',
                 post
             )
-            console.log('minha resposta', response)
+            setPosts(previousList => [
+                ...previousList,
+                ...[data]
+            ])
             setPost({
                 title: '',
                 text: ''

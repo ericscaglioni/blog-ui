@@ -1,19 +1,8 @@
 import { Grid } from '@material-ui/core'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PostItem from './PostItem'
 
-export default () => {
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get('http://localhost:8001/api/posts')
-            setPosts(response.data)
-        }
-        fetchData()
-    }, [])
-
+export default ({ posts }) => {
     const mountList = () => (
         posts.map(post => {
             const id = Object.keys(post)[0]

@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import AppBar from './appBar';
 import PostForm from './postForm';
-import PostsGrid from './postsGrid'
+import PostsGrid from './postsGrid';
 
 const useStyles = makeStyles(theme => ({
     layout: {
@@ -19,14 +20,22 @@ const useStyles = makeStyles(theme => ({
 
 export default () => {
     const classes = useStyles()
+    const [posts, setPosts] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get('http://localhost:8001/api/posts')
+            setPosts(response.data)
+        }
+        fetchData()
+    }, [])
 
     return (
         <>
             <AppBar />
             <main className={classes.layout}>
-                <PostForm />
+                <PostForm setPosts={setPosts}/>
             </main>
-            <PostsGrid />
+            <PostsGrid posts={posts}/>
         </>
     )
 }
